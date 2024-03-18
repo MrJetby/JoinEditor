@@ -1,0 +1,9 @@
+name: JoinEditor
+version: '${project.version}'
+main: me.jetby.joineditor.Main
+api-version: '1.20'
+authors: [MrJetby]
+depend:
+  - PlaceholderAPI
+commands:
+  joineditor: {}

@@ -1,0 +1,7 @@
+noperm: ""
+customjoin: ""
+customquit: ""
+usage:
+  - ""
+success:
+  - "Your msg: {msg}"

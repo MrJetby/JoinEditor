@@ -1,0 +1,25 @@
+
+
+#  |  Permissions:
+#  |   joineditor.customjoin
+#  |   joineditor.customquit
+
+
+messages:
+  noperm: "&cНедостаточно прав!"
+
+
+default:
+  join:
+    sound:
+    message:
+      - "{name} &fзашёл на сервер"
+      - "Второе сообщение"
+
+    customjoin:
+      message:
+        - "&c&l{name} &f{msg}"
+  quit:
+    sound:
+    message:
+      - "{name} &fвышел из сервера"
