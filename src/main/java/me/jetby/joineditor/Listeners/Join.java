@@ -19,16 +19,19 @@ public class Join implements Listener {
         String p = e.getPlayer().getName();
         String join = getInstance().db.getString("Players." + p + ".join");
 
-        if (join.isEmpty()) {
+        if (join == null || join.isEmpty()) {
 
-            for (String message : cfg.getStringList("default.join.message")) {
+            for (String message : cfg.getStringList("settings.join")) {
                 e.setJoinMessage("");
-                Bukkit.broadcastMessage(color(message).replace("{name}", p));
+                message = message.replace("%player%", p);
+                Bukkit.broadcastMessage(color(message));
             }
         } else {
-
+            for (String message : cfg.getStringList("settings.customjoin")) {
                 e.setJoinMessage("");
-                Bukkit.broadcastMessage(color(join).replace("{name}", p));
-
+                message = message.replace("%player%", p);
+                message = message.replace("%msg%", join);
+                Bukkit.broadcastMessage(color(message));
+            }
 
         }}}

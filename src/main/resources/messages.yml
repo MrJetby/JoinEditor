@@ -1,4 +1,5 @@
-noperm: ""
+noperm: "&cНедостаточно прав!"
+reload: "&aПлагин успешно перезагружен"
 customjoin: ""
 customquit: ""
 usage:

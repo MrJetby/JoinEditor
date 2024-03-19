@@ -23,3 +23,31 @@ default:
     sound:
     message:
       - "{name} &fвышел из сервера"
+
+
+settings:
+  customjoin:
+    - "&c&l&m-----------------------------"
+    - " &c&l%player% &f%msg%"
+    - "&c&l&m-----------------------------"
+  customquit:
+    - "&c&l&m-----------------------------"
+    - " &c&l%player% &f%msg%"
+    - "&c&l&m-----------------------------"
+
+  join:
+    - "&a&l&m-----------------------------"
+    - " &a&l%player% &fjoined the server"
+    - "&a&l&m-----------------------------"
+  quit:
+    - "&a&l&m-----------------------------"
+    - " &a&l%player% &fleft the server"
+    - "&a&l&m-----------------------------"
+
+  title: "Welcome to server"
+  subtitle: "Subtitle..."
+  motd:
+    - "&9&lYourServer"
+    - "&f"
+    - "&fWelcome, %player%"
+    - "&fDiscord &bhttps://dsc.gg/treexstudio"
