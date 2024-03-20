@@ -3,13 +3,13 @@ package me.jetby.joineditor.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 
 import static me.jetby.joineditor.Main.*;
 import static me.jetby.joineditor.Utils.Color.color;
+import static me.jetby.joineditor.Utils.Placeholders.ps;
 
 public class CustomMessage implements CommandExecutor {
     @Override
@@ -18,11 +18,18 @@ public class CustomMessage implements CommandExecutor {
         Player p = (Player) sender;
 
 
-
+        if (args[0].equalsIgnoreCase("reload")) {
+            instance.reloadConfig();
+            instance.settingsLoad();
+            instance.dbLoad();
+            instance.messageLoad();
+            p.sendMessage(color(instance.messages.getString("reload")));
+            return true;
+        }
         if (args[0].equalsIgnoreCase("customjoin")) {
             if (!sender.hasPermission("joineditor.customjoin")) {
 
-                p.sendMessage(color(getCfg().getString("messages.noperm")));
+                p.sendMessage(color(instance.messages.getString("noperm")));
 
             }
             if (args.length>0) {
@@ -32,14 +39,12 @@ public class CustomMessage implements CommandExecutor {
                     message = message+args[i]+" "; //сбор всех аргументов в одно целое
                 }
 
-                message.replace("{name}", p.getName());
-
-                instance.db.set("Players." + p.getName() + "." + "join", message);
+                instance.db.set("Players." + p.getName() + "." + "join", ps(p, message));
                 instance.dbsave();
 
                 for (String successMsg : instance.messages.getStringList("success")) {
-                    successMsg = successMsg.replace("{msg}", message);
-                    p.sendMessage(color(successMsg));
+                    successMsg = successMsg.replace("%msg%", message);
+                    p.sendMessage(ps(p, successMsg));
                 }
             }
             return true;
@@ -48,7 +53,7 @@ public class CustomMessage implements CommandExecutor {
         if (args[0].equalsIgnoreCase("customquit")) {
             if (!sender.hasPermission("joineditor.customquit")) {
 
-                p.sendMessage(color(getCfg().getString("messages.noperm")));
+                p.sendMessage(color(instance.messages.getString("noperm")));
 
             }
             if (args.length>0) {
@@ -58,9 +63,8 @@ public class CustomMessage implements CommandExecutor {
                     message = message+args[i]+" "; //сбор всех аргументов в одно целое
                 }
 
-                message.replace("{name}", p.getName());
 
-                instance.db.set("Players." + p.getName() + "quit", message);
+                instance.db.set("Players." + p.getName() + "quit", ps(p, message));
                 instance.dbsave();
                 p.sendMessage("Your msg: " + color(message));
             }
@@ -68,9 +72,15 @@ public class CustomMessage implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("test")) {
-            sender.sendMessage(color(getCfg().getString("Players." + p.getName() + "." + "join")));
-            sender.sendMessage(color(getCfg().getString("Players." + p.getName() + "." + "quit")));
-            return true;
+            if (args[1].equalsIgnoreCase("title")) {
+                p.sendTitle(ps(p, instance.settings.getString("title")), ps(p, settings.getString("subtitle")));
+                return true;
+            }
+            if (args[1].equalsIgnoreCase("customtitle")) {
+                p.sendTitle(ps(p, instance.settings.getString("settings.title")), ps(p, settings.getString("settings.subtitle")));
+                return true;
+            }
+        return true;
         }
         return false;
     }

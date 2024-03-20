@@ -1,28 +1,17 @@
 
 
 #  |  Permissions:
+#  |   joineditor.admin - /joineditor reload
 #  |   joineditor.customjoin
 #  |   joineditor.customquit
 
 
-messages:
-  noperm: "&cНедостаточно прав!"
-
-
-default:
-  join:
-    sound:
-    message:
-      - "{name} &fзашёл на сервер"
-      - "Второе сообщение"
-
-    customjoin:
-      message:
-        - "&c&l{name} &f{msg}"
-  quit:
-    sound:
-    message:
-      - "{name} &fвышел из сервера"
+enables:
+  join: true
+  quit: true
+  title: true
+  subtitle: true
+  motd: true
 
 
 settings:

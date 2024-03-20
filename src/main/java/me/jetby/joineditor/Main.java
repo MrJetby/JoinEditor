@@ -1,7 +1,6 @@
 package me.jetby.joineditor;
 
 import me.jetby.joineditor.Commands.CustomMessage;
-import me.jetby.joineditor.Commands.Reload;
 import me.jetby.joineditor.Commands.TabCompleter;
 import me.jetby.joineditor.Listeners.Join;
 import me.jetby.joineditor.Listeners.Motd;
@@ -19,30 +18,22 @@ public final class Main extends JavaPlugin {
 
     public static Main instance;
 
-    public static FileConfiguration cfg;
-    public YamlConfiguration db;
+    public static YamlConfiguration settings;
+    public static YamlConfiguration db;
+    public YamlConfiguration cfgReload;
     public YamlConfiguration messages;
-    public YamlConfiguration config;
-    public static Main getInstance() {
-        return instance;
-    }
 
-    public static FileConfiguration getCfg() {
-        return cfg;
-    }
 
     @Override
     public void onEnable() {
 
         instance = this;
-        cfg = getConfig();
 
         getServer().getPluginManager().registerEvents(new Join(), this);
         getServer().getPluginManager().registerEvents(new Quit(), this);
         getServer().getPluginManager().registerEvents(new SendTitle(), this);
         getServer().getPluginManager().registerEvents(new Motd(), this);
         getCommand("joineditor").setExecutor(new CustomMessage());
-        getCommand("joineditor").setExecutor(new Reload());
         getCommand("joineditor").setTabCompleter(new TabCompleter());
 
         saveDefaultConfig();
@@ -50,6 +41,7 @@ public final class Main extends JavaPlugin {
 
         dbLoad();
         messageLoad();
+        settingsLoad();
     }
 
     @Override
@@ -65,6 +57,12 @@ public final class Main extends JavaPlugin {
         saveResource("messages.yml", false);
         File file = new File(getDataFolder().getAbsolutePath() + "/messages.yml");
         messages = YamlConfiguration.loadConfiguration(file);
+    }
+
+    public void settingsLoad() {
+        saveResource("settings.yml", false);
+        File file = new File(getDataFolder().getAbsolutePath() + "/settings.yml");
+        settings = YamlConfiguration.loadConfiguration(file);
     }
 
     public void dbsave() {

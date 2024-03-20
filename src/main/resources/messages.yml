@@ -5,4 +5,4 @@ customquit: ""
 usage:
   - ""
 success:
-  - "Your msg: {msg}"
+  - "Your msg: %msg%"
