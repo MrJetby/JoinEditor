@@ -1,5 +1,6 @@
 package me.jetby.joineditor.Commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,15 +18,21 @@ public class CustomMessage implements CommandExecutor {
 
         Player p = (Player) sender;
 
-
         if (args[0].equalsIgnoreCase("reload")) {
-            instance.reloadConfig();
-            instance.settingsLoad();
-            instance.dbLoad();
-            instance.messageLoad();
-            p.sendMessage(color(instance.messages.getString("reload")));
-            return true;
+            if (!sender.hasPermission("joineditor.admin")) {
+
+                p.sendMessage(color(instance.messages.getString("noperm")));
+
+            } else {
+                instance.reloadConfig();
+                instance.settingsLoad();
+                instance.dbLoad();
+                instance.messageLoad();
+                p.sendMessage(color(instance.messages.getString("reload")));
+                return true;
+            }
         }
+
         if (args[0].equalsIgnoreCase("customjoin")) {
             if (!sender.hasPermission("joineditor.customjoin")) {
 
@@ -72,14 +79,35 @@ public class CustomMessage implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("test")) {
-            if (args[1].equalsIgnoreCase("title")) {
-                p.sendTitle(ps(p, instance.settings.getString("title")), ps(p, settings.getString("subtitle")));
-                return true;
-            }
-            if (args[1].equalsIgnoreCase("customtitle")) {
-                p.sendTitle(ps(p, instance.settings.getString("settings.title")), ps(p, settings.getString("settings.subtitle")));
-                return true;
-            }
+            if (!sender.hasPermission("joineditor.admin")) {
+
+                p.sendMessage(color(instance.messages.getString("noperm")));
+
+            } else {
+                if (args[1].equalsIgnoreCase("title")) {
+                    p.sendTitle(ps(p, instance.settings.getString("settings.title")), ps(p, settings.getString("settings.subtitle")));
+                    return true;
+                }
+                if (args[1].equalsIgnoreCase("join")) {
+                    for (String message : settings.getStringList("settings.join")) {
+                        p.sendMessage(ps(p, message));
+                    }
+                    return true;
+                }
+                if (args[1].equalsIgnoreCase("quit")) {
+                    for (String message : settings.getStringList("settings.quit")) {
+                        p.sendMessage(ps(p, message));
+                    }
+                    return true;
+                }
+                if (args[1].equalsIgnoreCase("motd")) {
+                    for (String message : settings.getStringList("settings.motd")) {
+                        message =  ps(p, color(message));
+
+                        p.sendMessage(message);
+                    }
+                    return true;
+                }}
         return true;
         }
         return false;

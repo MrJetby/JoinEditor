@@ -20,7 +20,6 @@ public final class Main extends JavaPlugin {
 
     public static YamlConfiguration settings;
     public static YamlConfiguration db;
-    public YamlConfiguration cfgReload;
     public YamlConfiguration messages;
 
 
@@ -35,9 +34,6 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Motd(), this);
         getCommand("joineditor").setExecutor(new CustomMessage());
         getCommand("joineditor").setTabCompleter(new TabCompleter());
-
-        saveDefaultConfig();
-        reloadConfig();
 
         dbLoad();
         messageLoad();

@@ -1,9 +1,10 @@
 
 
-#  |  Permissions:
+
+#  |  Права:
 #  |   joineditor.admin - /joineditor reload
-#  |   joineditor.customjoin
-#  |   joineditor.customquit
+#  |   joineditor.customjoin - /joineditor customjoin
+#  |   joineditor.customquit - /joineditor customquit
 
 
 enables:
@@ -12,7 +13,15 @@ enables:
   title: true
   subtitle: true
   motd: true
+  commandsOnJoin:
+    Player: true
+    Console: true
 
+commandsOnJoin:
+  Player:
+    - 'say Test command for %player%'
+  Console:
+    - 'say Test command from console for %player%'
 
 settings:
   customjoin:
@@ -26,17 +35,17 @@ settings:
 
   join:
     - "&a&l&m-----------------------------"
-    - " &a&l%player% &fjoined the server"
+    - " &a&l%player% &fзашёл на сервер."
     - "&a&l&m-----------------------------"
   quit:
     - "&a&l&m-----------------------------"
-    - " &a&l%player% &fleft the server"
+    - " &a&l%player% &fвышел с сервера."
     - "&a&l&m-----------------------------"
 
-  title: "Welcome to server"
-  subtitle: "Subtitle..."
+  title: "Добро пожаловать"
+  subtitle: "Настройте в settings.yml"
   motd:
-    - "&9&lYourServer"
+    - "&9&lВаш сервер"
     - "&f"
-    - "&fWelcome, %player%"
+    - "&fДобро пожаловать, %player%"
     - "&fDiscord &bhttps://dsc.gg/treexstudio"
