@@ -2,6 +2,8 @@ package me.jetby.joineditor.Listeners;
 
 import me.jetby.joineditor.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -20,7 +22,7 @@ public class Join implements Listener {
         List<String> Console = settings.getStringList("commandsOnJoin.Console");
         String p = e.getPlayer().getName();
         String join = db.getString("Players." + p + ".join");
-
+        
         if (settings.getBoolean("enables.commandsOnJoin.Console")==true) {
             for(String cmd : Console) {
                 String newCmd = cmd;
@@ -39,15 +41,16 @@ public class Join implements Listener {
                 Bukkit.getServer().dispatchCommand(e.getPlayer(), ps(e.getPlayer(), newCmd));
             }
         }
-
-
-
-
         if (join == null || join.isEmpty()) {
 
             for (String message : settings.getStringList("settings.join")) {
                 e.setJoinMessage("");
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
+            }
+            for (Player sounds : Bukkit.getOnlinePlayers()) {
+                String soundName = settings.getString("sounds.Join");
+                Sound sound = Sound.valueOf(soundName);
+                sounds.playSound(sounds.getLocation(), sound, 1, 1);
             }
         } else {
             for (String message : settings.getStringList("settings.customjoin")) {
@@ -55,5 +58,9 @@ public class Join implements Listener {
                 message = message.replace("%msg%", join);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
-
+            for (Player sounds : Bukkit.getOnlinePlayers()) {
+                String soundName = settings.getString("sounds.CustomJoin");
+                Sound sound = Sound.valueOf(soundName);
+                sounds.playSound(sounds.getLocation(), sound, 1, 1);
+            }
         }}}

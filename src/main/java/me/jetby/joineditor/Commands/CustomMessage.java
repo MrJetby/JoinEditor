@@ -71,7 +71,7 @@ public class CustomMessage implements CommandExecutor {
                 }
 
 
-                instance.db.set("Players." + p.getName() + "quit", ps(p, message));
+                instance.db.set("Players." + p.getName() + "." + "quit", ps(p, message));
                 instance.dbsave();
                 p.sendMessage("Your msg: " + color(message));
             }

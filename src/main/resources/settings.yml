@@ -7,6 +7,12 @@
 #  |   joineditor.customquit - /joineditor customquit
 
 
+sounds:
+  Join: ENTITY_WOLF_AMBIENT
+  Quit: ENTITY_CAT_HURT
+  CustomJoin: ENTITY_VILLAGER_YES
+  CustomQuit: ENTITY_VILLAGER_NO
+
 enables:
   join: true
   quit: true

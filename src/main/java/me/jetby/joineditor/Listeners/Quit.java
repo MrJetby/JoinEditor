@@ -1,6 +1,8 @@
 package me.jetby.joineditor.Listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -24,11 +26,20 @@ public class Quit implements Listener {
                 e.setQuitMessage("");
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
+            for (Player sounds : Bukkit.getOnlinePlayers()) {
+                String soundName = settings.getString("sounds.Quit");
+                Sound sound = Sound.valueOf(soundName);
+                sounds.playSound(sounds.getLocation(), sound, 1, 1);
+            }
         } else {
             for (String message : settings.getStringList("settings.customquit")) {
                 e.setQuitMessage("");
                 message = message.replace("%msg%", quit);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
-
+            for (Player sounds : Bukkit.getOnlinePlayers()) {
+                String soundName = settings.getString("sounds.CustomQuit");
+                Sound sound = Sound.valueOf(soundName);
+                sounds.playSound(sounds.getLocation(), sound, 1, 1);
+            }
         }}}
