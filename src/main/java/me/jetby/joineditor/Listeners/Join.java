@@ -22,7 +22,7 @@ public class Join implements Listener {
         List<String> Console = settings.getStringList("commandsOnJoin.Console");
         String p = e.getPlayer().getName();
         String join = db.getString("Players." + p + ".join");
-        
+        if (e.getPlayer().hasPlayedBefore()) {
         if (settings.getBoolean("enables.commandsOnJoin.Console")==true) {
             for(String cmd : Console) {
                 String newCmd = cmd;
@@ -44,7 +44,7 @@ public class Join implements Listener {
         if (join == null || join.isEmpty()) {
 
             for (String message : settings.getStringList("settings.join")) {
-                e.setJoinMessage("");
+                e.setJoinMessage(null);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
             for (Player sounds : Bukkit.getOnlinePlayers()) {
@@ -54,7 +54,7 @@ public class Join implements Listener {
             }
         } else {
             for (String message : settings.getStringList("settings.customjoin")) {
-                e.setJoinMessage("");
+                e.setJoinMessage(null);
                 message = message.replace("%msg%", join);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
@@ -63,4 +63,4 @@ public class Join implements Listener {
                 Sound sound = Sound.valueOf(soundName);
                 sounds.playSound(sounds.getLocation(), sound, 1, 1);
             }
-        }}}
+        }}}}

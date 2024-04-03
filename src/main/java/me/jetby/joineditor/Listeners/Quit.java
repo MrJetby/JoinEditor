@@ -23,7 +23,7 @@ public class Quit implements Listener {
         if (quit == null || quit.isEmpty()) {
 
             for (String message : settings.getStringList("settings.quit")) {
-                e.setQuitMessage("");
+                e.setQuitMessage(null);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
             for (Player sounds : Bukkit.getOnlinePlayers()) {
@@ -33,7 +33,7 @@ public class Quit implements Listener {
             }
         } else {
             for (String message : settings.getStringList("settings.customquit")) {
-                e.setQuitMessage("");
+                e.setQuitMessage(null);
                 message = message.replace("%msg%", quit);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }

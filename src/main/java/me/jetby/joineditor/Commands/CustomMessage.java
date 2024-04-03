@@ -24,7 +24,6 @@ public class CustomMessage implements CommandExecutor {
                 p.sendMessage(color(instance.messages.getString("noperm")));
 
             } else {
-                instance.reloadConfig();
                 instance.settingsLoad();
                 instance.dbLoad();
                 instance.messageLoad();

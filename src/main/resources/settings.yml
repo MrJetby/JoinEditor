@@ -9,11 +9,13 @@
 
 sounds:
   Join: ENTITY_WOLF_AMBIENT
+  FirstJoin: ENTITY_WOLF_AMBIENT
   Quit: ENTITY_CAT_HURT
   CustomJoin: ENTITY_VILLAGER_YES
   CustomQuit: ENTITY_VILLAGER_NO
 
 enables:
+  FirstJoin: true
   join: true
   quit: true
   title: true
@@ -22,7 +24,15 @@ enables:
   commandsOnJoin:
     Player: true
     Console: true
+  FirstJoinCommands:
+    Player: true
+    Console: true
 
+FirstJoinCommands:
+  Player:
+    - 'say Test'
+  Console:
+    - 'say Test from console'
 commandsOnJoin:
   Player:
     - 'say Test command for %player%'
@@ -39,6 +49,10 @@ settings:
     - " &c&l%player% &f%msg%"
     - "&c&l&m-----------------------------"
 
+  FirstJoin:
+    - "&d&l&m-----------------------------"
+    - " &d&l%player% &fвпервые зашёл на сервер."
+    - "&d&l&m-----------------------------"
   join:
     - "&a&l&m-----------------------------"
     - " &a&l%player% &fзашёл на сервер."
@@ -55,3 +69,47 @@ settings:
     - "&f"
     - "&fДобро пожаловать, %player%"
     - "&fDiscord &bhttps://dsc.gg/treexstudio"
+
+
+
+
+
+
+
+
+
+#      ВСЕ ТИПЫ
+#      - '[MSG] Message'
+#      - '[MSG_BROADCAST] Message'
+#      - '[TITLE] First;Second'
+#      - '[TITLE_BROADCAST] First;Second'
+#      - '[ACTIONBAR] Message'
+#      - '[ACTIONBAR_BROADCAST] Message'
+#      - '[CONSOLE] give %player% diamond 2'
+#      - '[PLAYER] menu'
+
+
+
+
+
+
+Join:
+  default:
+    priority: 1
+    permission: joineditor.default
+    actions:
+      - '[MSG] Message'
+      - '[MSG_BROADCAST] Message'
+      - '[TITLE] First;Second'
+      - '[TITLE_BROADCAST] First;Second'
+      - '[ACTIONBAR] Message'
+      - '[ACTIONBAR_BROADCAST] Message'
+      - '[CONSOLE] give %player% diamond 2'
+      - '[PLAYER] menu'
+  firstjoin:
+    permission: joineditor.firstjoin
+    actions:
+      - '[MSG] Message'
+      - '[TITLE] First;Second'
+      - '[ACTIONBAR] Message'
+      - '[CONSOLE] give %player% diamond 64'
