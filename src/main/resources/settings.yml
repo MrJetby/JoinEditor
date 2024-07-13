@@ -94,9 +94,15 @@ settings:
 
 
 Join:
-  default:
-    priority: 1
+  another:
     permission: joineditor.default
+    actions:
+      - '[MSG_BROADCAST] %player% зашёл на сервер'
+      - '[TITLE] First;Second'
+      - '[CONSOLE] give %player% emerald 2'
+      - '[PLAYER] menu'
+      - '[SOUND] SOUND_NAME'
+  default:
     actions:
       - '[MSG] Message'
       - '[MSG_BROADCAST] Message'
@@ -106,10 +112,11 @@ Join:
       - '[ACTIONBAR_BROADCAST] Message'
       - '[CONSOLE] give %player% diamond 2'
       - '[PLAYER] menu'
+      - '[SOUND] BLOCK_NOTE_BLOCK_BIT'
   firstjoin:
-    permission: joineditor.firstjoin
+    enabled: true
     actions:
       - '[MSG] Message'
-      - '[TITLE] First;Second'
+      - '[TITLE] Привет новичок;Добро пожаловать'
       - '[ACTIONBAR] Message'
       - '[CONSOLE] give %player% diamond 64'

@@ -15,10 +15,12 @@ public class Motd implements Listener {
     @EventHandler
     public void Motd(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        for (String message : settings.getStringList("settings.motd")) {
-            message =  ps(p, color(message));
+        if (settings.getBoolean("enables.commandsOnJoin.Console")==true) {
+            for (String message : settings.getStringList("settings.motd")) {
+                message = ps(p, color(message));
 
-                    p.sendMessage(message);
+                p.sendMessage(message);
+            }
         }
     }
 }

@@ -18,49 +18,45 @@ public class Join implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        List<String> Player = settings.getStringList("commandsOnJoin.Player");
+        Player p = e.getPlayer();
         List<String> Console = settings.getStringList("commandsOnJoin.Console");
-        String p = e.getPlayer().getName();
-        String join = db.getString("Players." + p + ".join");
-        if (e.getPlayer().hasPlayedBefore()) {
-        if (settings.getBoolean("enables.commandsOnJoin.Console")==true) {
-            for(String cmd : Console) {
-                String newCmd = cmd;
-                if(newCmd.contains("%player%")) {
-                    newCmd = newCmd.replace("%player%", e.getPlayer().getName());
-                }
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), ps(e.getPlayer(), newCmd));
-            }
-        }
-        if (settings.getBoolean("enables.commandsOnJoin.Player")==true) {
-            for(String cmd : Player) {
-                String newCmd = cmd;
-                if(newCmd.contains("%player%")) {
-                    newCmd = newCmd.replace("%player%", e.getPlayer().getName());
-                }
-                Bukkit.getServer().dispatchCommand(e.getPlayer(), ps(e.getPlayer(), newCmd));
-            }
-        }
-        if (join == null || join.isEmpty()) {
 
-            for (String message : settings.getStringList("settings.join")) {
-                e.setJoinMessage(null);
-                Bukkit.broadcastMessage(ps(e.getPlayer(), message));
-            }
-            for (Player sounds : Bukkit.getOnlinePlayers()) {
-                String soundName = settings.getString("sounds.Join");
-                Sound sound = Sound.valueOf(soundName);
-                sounds.playSound(sounds.getLocation(), sound, 1, 1);
-            }
-        } else {
-            for (String message : settings.getStringList("settings.customjoin")) {
-                e.setJoinMessage(null);
-                message = message.replace("%msg%", join);
-                Bukkit.broadcastMessage(ps(e.getPlayer(), message));
-            }
-            for (Player sounds : Bukkit.getOnlinePlayers()) {
-                String soundName = settings.getString("sounds.CustomJoin");
-                Sound sound = Sound.valueOf(soundName);
-                sounds.playSound(sounds.getLocation(), sound, 1, 1);
-            }
-        }}}}
+        List<String> defaultActions = settings.getStringList("Join.default.actions");
+        if (e.getPlayer().hasPlayedBefore()) {
+        for (String act : defaultActions) {
+                executeAction(p, act);
+           }
+        }
+    }
+
+
+    public void executeAction(Player player, String action) {
+        String command = action.substring(action.indexOf(' ') + 1);
+        switch (action.split("]")[0]) {
+            case "[MSG":
+                player.sendMessage(command);
+                break;
+            case "[MSG_BROADCAST":
+                Bukkit.broadcastMessage(command);
+                break;
+            case "[TITLE":
+                String[] titleParts = command.split(";");
+                player.sendTitle(titleParts[0], titleParts[1], 10, 70, 20);
+                break;
+            case "[TITLE_BROADCAST":
+                String[] broadcastTitleParts = command.split(";");
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendTitle(broadcastTitleParts[0], broadcastTitleParts[1], 10, 70, 20));
+                break;
+
+            case "[CONSOLE":
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", player.getName()));
+                break;
+            case "[PLAYER":
+                Bukkit.dispatchCommand(player, command);
+                break;
+            case "[SOUND":
+                player.playSound(player.getLocation(), Sound.valueOf(command), 1.0F, 1.0F);
+                break;
+        }
+}
+}

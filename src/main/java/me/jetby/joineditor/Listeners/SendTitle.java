@@ -17,7 +17,32 @@ public class SendTitle implements Listener {
         String title = settings.getString("settings.title");
         String subtitle = settings.getString("settings.subtitle");
 
+
         Player p = e.getPlayer();
+
+        if (settings.getBoolean("enables.title")==false) {
+            if (settings.getBoolean("enables.subtitle")==true) {
+                if (title==null || subtitle!=null) {
+                    p.sendTitle(" ", ps(p, subtitle));
+                }
+                return;
+            }
+            return;
+        } else {
+            if (title!=null || subtitle==null) {
+                p.sendTitle(ps(p, title), " ");
+            }
+
+        }
+        if (settings.getBoolean("enables.subtitle")==false) {
+            return;
+        } else {
+            if (title==null || subtitle!=null) {
+                p.sendTitle(" ", ps(p, subtitle));
+            }
+        }
+        if (title==null || subtitle==null) return;
+
 
         p.sendTitle(ps(p, title), ps(p, subtitle));
     }

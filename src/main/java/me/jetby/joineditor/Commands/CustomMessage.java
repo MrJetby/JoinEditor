@@ -22,6 +22,7 @@ public class CustomMessage implements CommandExecutor {
             if (!sender.hasPermission("joineditor.admin")) {
 
                 p.sendMessage(color(instance.messages.getString("noperm")));
+                return true;
 
             } else {
                 instance.settingsLoad();
@@ -32,50 +33,7 @@ public class CustomMessage implements CommandExecutor {
             }
         }
 
-        if (args[0].equalsIgnoreCase("customjoin")) {
-            if (!sender.hasPermission("joineditor.customjoin")) {
 
-                p.sendMessage(color(instance.messages.getString("noperm")));
-
-            }
-            if (args.length>0) {
-
-                String message = "";
-                for (int i = 1; i < args.length; i++) { //цикл, который проходит по массиву аргументов
-                    message = message+args[i]+" "; //сбор всех аргументов в одно целое
-                }
-
-                instance.db.set("Players." + p.getName() + "." + "join", ps(p, message));
-                instance.dbsave();
-
-                for (String successMsg : instance.messages.getStringList("success")) {
-                    successMsg = successMsg.replace("%msg%", message);
-                    p.sendMessage(ps(p, successMsg));
-                }
-            }
-            return true;
-        }
-
-        if (args[0].equalsIgnoreCase("customquit")) {
-            if (!sender.hasPermission("joineditor.customquit")) {
-
-                p.sendMessage(color(instance.messages.getString("noperm")));
-
-            }
-            if (args.length>0) {
-
-                String message = "";
-                for (int i = 1; i < args.length; i++) { //цикл, который проходит по массиву аргументов
-                    message = message+args[i]+" "; //сбор всех аргументов в одно целое
-                }
-
-
-                instance.db.set("Players." + p.getName() + "." + "quit", ps(p, message));
-                instance.dbsave();
-                p.sendMessage("Your msg: " + color(message));
-            }
-            return true;
-        }
 
         if (args[0].equalsIgnoreCase("test")) {
             if (!sender.hasPermission("joineditor.admin")) {

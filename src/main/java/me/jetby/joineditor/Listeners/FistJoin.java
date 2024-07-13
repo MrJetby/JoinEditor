@@ -44,9 +44,10 @@ public class FistJoin implements Listener {
                 e.setJoinMessage(null);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
+            String FirstSound = settings.getString("sounds.FirstJoin");
+            if (FirstSound==null) return;
             for (org.bukkit.entity.Player sounds : Bukkit.getOnlinePlayers()) {
-                String soundName = settings.getString("sounds.FirstJoin");
-                Sound sound = Sound.valueOf(soundName);
+                Sound sound = Sound.valueOf(FirstSound);
                 sounds.playSound(sounds.getLocation(), sound, 1, 1);
             }
         }}}

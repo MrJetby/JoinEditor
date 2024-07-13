@@ -26,9 +26,11 @@ public class Quit implements Listener {
                 e.setQuitMessage(null);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
+            String QuitSound = settings.getString("sounds.Quit");
+            if (QuitSound==null) return;
+
             for (Player sounds : Bukkit.getOnlinePlayers()) {
-                String soundName = settings.getString("sounds.Quit");
-                Sound sound = Sound.valueOf(soundName);
+                Sound sound = Sound.valueOf(QuitSound);
                 sounds.playSound(sounds.getLocation(), sound, 1, 1);
             }
         } else {
@@ -37,9 +39,10 @@ public class Quit implements Listener {
                 message = message.replace("%msg%", quit);
                 Bukkit.broadcastMessage(ps(e.getPlayer(), message));
             }
+            String CustomQuitSound = settings.getString("sounds.CustomQuit");
+            if (CustomQuitSound==null) return;
             for (Player sounds : Bukkit.getOnlinePlayers()) {
-                String soundName = settings.getString("sounds.CustomQuit");
-                Sound sound = Sound.valueOf(soundName);
+                Sound sound = Sound.valueOf(CustomQuitSound);
                 sounds.playSound(sounds.getLocation(), sound, 1, 1);
             }
         }}}

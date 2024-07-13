@@ -10,5 +10,5 @@ commands:
     aliases:
       - je
     description: /joineditor customjoin/customquit/reload/test
-  customjoin:
-    
+  customjoin: {}
+  customquit: {}

@@ -11,14 +11,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if (args.length==1 && sender.hasPermission("joineditor.admin")) {
             return List.of(
                     "reload",
-                    "customjoin",
-                    "customquit",
                     "test"
-            );
-        } else if (args.length==1) {
-            return List.of(
-                    "customjoin",
-                    "customquit"
             );
         }
 

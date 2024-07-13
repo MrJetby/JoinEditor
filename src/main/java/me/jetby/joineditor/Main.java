@@ -1,6 +1,8 @@
 package me.jetby.joineditor;
 
+import me.jetby.joineditor.Commands.CustomJoin;
 import me.jetby.joineditor.Commands.CustomMessage;
+import me.jetby.joineditor.Commands.CustomQuit;
 import me.jetby.joineditor.Commands.TabCompleter;
 import me.jetby.joineditor.Listeners.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,6 +33,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SendTitle(), this);
         getServer().getPluginManager().registerEvents(new Motd(), this);
         getCommand("joineditor").setExecutor(new CustomMessage());
+        getCommand("customjoin").setExecutor(new CustomJoin());
+        getCommand("customquit").setExecutor(new CustomQuit());
         getCommand("joineditor").setTabCompleter(new TabCompleter());
 
         dbLoad();
