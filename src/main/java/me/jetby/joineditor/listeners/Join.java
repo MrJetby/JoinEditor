@@ -1,5 +1,7 @@
 package me.jetby.joineditor.listeners;
 
+import me.jetby.joineditor.Main;
+import me.jetby.joineditor.configurations.DataBase;
 import me.jetby.joineditor.utils.Actions;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,6 +54,8 @@ public class Join implements Listener {
                 if (CFG().getBoolean("counting")) {
                     playerNumber = DB().getInt("number", 0);
                     DB().set("number", playerNumber+1);
+                    DataBase db = new DataBase();
+                    db.saveCfg(Main.getInstance());
                 } else {
                     playerNumber = 0;
 

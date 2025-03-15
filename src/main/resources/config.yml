@@ -19,7 +19,7 @@ counting: true # Включить счёт нового игрока. Плейс
 FirstJoin:
   enable: true
   actions:
-    - '[MSG_BROADCAST] &a[+] %player% &впервые зашёл на сервер! &7[&6#%number%&7]'
+    - '[MSG_BROADCAST] &a[+] %player% &aвпервые зашёл на сервер! &7[&6#%number%&7]'
     - '[MSG] '
     - '[MSG] '
     - '[MSG] '
