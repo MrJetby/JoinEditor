@@ -1,5 +1,7 @@
 noperm: "&cНедостаточно прав!"
 reload: "&aПлагин успешно перезагружен"
+
+# Скоро
 customjoin: ""
 customquit: ""
 usage:

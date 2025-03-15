@@ -1,0 +1,76 @@
+
+#      ВСЕ ТИПЫ
+#      - '[MSG] Message'
+#      - '[MSG_BROADCAST] Message'
+#      - '[TITLE] First;Second'
+#      - '[TITLE_BROADCAST] First;Second'
+#      - '[ACTIONBAR] Message'
+#      - '[ACTIONBAR_BROADCAST] Message'
+#      - '[CONSOLE] give %player% diamond 2'
+#      - '[PLAYER] menu'
+#      - '[SOUND] SOUND_NAME'
+#      - '[SOUND_BROADCAST] SOUND_NAME'
+#      - '[EFFECT]'
+
+
+counting: true # Включить счёт нового игрока. Плейсхолдер %number% | Работает только в FirstJoin
+
+
+FirstJoin:
+  enable: true
+  actions:
+    - '[MSG_BROADCAST] &a[+] %player% &впервые зашёл на сервер! &7[&6#%number%&7]'
+    - '[MSG] '
+    - '[MSG] '
+    - '[MSG] '
+    - '[MSG] '
+    - '[MSG] '
+    - '[MSG] '
+    - '[MSG] '
+    - '[MSG] &7[ &b&lДобро пожаловать &7]'
+    - '[MSG] &fРады вас видеть на нашем проекте!'
+    - '[MSG] '
+    - '[MSG]       &7&k||| &c&lHELP &7&k||| '
+    - '[MSG] '
+    - '[MSG]  &c&l/menu &8- &fМеню'
+    - '[MSG]  &c&l/help &8- &fПомощь'
+    - '[MSG]  &c&l/rtp &8- &fТелепорт в мир'
+    - '[MSG]  &c&m                              '
+    - '[MSG] '
+    - '[MSG] &fDiscord сервер &8- &6&ldsc.gg/treexstudio'
+    - '[MSG] '
+    - '[TITLE] &a&lServer name;&fДобро пожаловать!'
+
+Join:
+  default:
+    actions:
+      - '[MSG_BROADCAST] &a[+] %player% &fзашёл на сервер!'
+      - '[MSG] '
+      - '[MSG] '
+      - '[MSG] '
+      - '[MSG] '
+      - '[MSG] '
+      - '[MSG] '
+      - '[MSG] '
+      - '[MSG] &7[ &b&lДобро пожаловать &7]'
+      - '[MSG] &fРады вас снова видеть на нашем проекте!'
+      - '[MSG] '
+      - '[MSG] &fDiscord сервер &8- &6&ldsc.gg/treexstudio'
+      - '[MSG] '
+      - '[TITLE] &a&lServer name;&fС Возвращением!'
+
+
+Quit:
+  epic:
+    permission: epic
+    actions:
+      - '[MSG_BROADCAST] &c&l[+] %player% &fвышел с сервера :('
+  default:
+    actions:
+      - '[MSG_BROADCAST] &c[+] %player% &fвышел с сервера :('
+
+
+FirstQuit:
+  enable: false
+  actions:
+    - '[MSG_BROADCAST] &c[+] %player% &fвпервые вышел с сервера :('

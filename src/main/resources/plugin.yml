@@ -2,6 +2,7 @@ name: JoinEditor
 version: '${project.version}'
 main: me.jetby.joineditor.Main
 api-version: '1.16'
+description: 'by https://discord.gg/treexstudio'
 authors: [MrJetby]
 depend:
   - PlaceholderAPI
@@ -9,6 +10,6 @@ commands:
   joineditor:
     aliases:
       - je
-    description: /joineditor customjoin/customquit/reload/test
+    description: /joineditor reload/test
   customjoin: {}
   customquit: {}

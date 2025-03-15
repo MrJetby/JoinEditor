@@ -1,4 +1,4 @@
-package me.jetby.joineditor.Commands;
+package me.jetby.joineditor.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,10 +17,10 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 
         if (args[0].equalsIgnoreCase("test") && args.length==2 && sender.hasPermission("joineditor.admin")) {
                 return List.of(
-                        "title",
-                        "join",
-                        "quit",
-                        "motd"
+                        "Join",
+                        "FirstJoin",
+                        "Quit",
+                        "FirstQuit"
                 );
             }
         return null;
